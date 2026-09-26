@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lynjai Jimenez | Passport Portfolio</title>
+    <script defer src="script.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Special+Elite&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <main>
+      <!-- Front Cover -->
+      <section class="view cover is-active">
+        <h1>PASSPORT</h1>
+        <p class="cover-name">Lynjai Jimenez</p>
+        <button class="open-btn">Open</button>
+      </section>
+
+      <!-- SPREAD 1: ID + PROJECT STAMPS -->
+      <section class="view spread">
+        <div class="page page-left id-page">
+          <div class="photo-wrapper">
+            <!-- TODO: add images/profile.jpg -->
+            <img src="images/me4.jpg" alt="Portrait of Lynjai Jimenez." class="photo" />
+            <div class="grommet grommet-top" aria-hidden="true"></div>
+            <div class="grommet grommet-bottom" aria-hidden="true"></div>
+          </div>
+          <div class="tape-label">
+            <span>Lynjai Jimenez</span>
+          </div>
+          <dl class="id-fields">
+            <dt>Forename</dt>
+            <dd>Lynjai</dd>
+            <dt>Surname</dt>
+            <dd>Jimenez</dd>
+            <dt>Residence</dt>
+            <dd>Maryland, US</dd>
+            <dt>Occupation</dt>
+            <dd>Full-Stack Software Engineer</dd>
+            <dt>Issued by</dt>
+            <dd>University of Maryland Global Campus, Class of 2026</dd>
+            <dt>Languages spoken</dt>
+            <dd>JavaScript, TypeScript, Python, HTML, CSS</dd>
+            <dt>Status</dt>
+            <dd>Aspiring Junior Software Engineer</dd>
+          </dl>
+          <img src="images/sig.png" alt="Signature of Lynjai Jimenez." class="signature" />
+          <div class="circular-stamp" aria-hidden="true">
+            <span>Valid</span>
+          </div>
+        </div>
+
+        <div class="page page-right stamps-page">
+          <h2>Project Stamps</h2>
+          <!-- TODO: replace placeholder names, paths, and captions with the real CodeSquad assignments -->
+          <div class="stamp-grid">
+            <button
+              class="stamp stamp-project"
+              data-full="images/screenshots/codesquad-1.png"
+              data-caption="CodeSquad Mini Course, Assignment 1"
+            >
+              <img
+                src="images/stamps/codesquad-1.png"
+                alt="Stamp for CodeSquad Mini Course assignment 1"
+              />
+              <span class="stamp-label">Assignment 1</span>
+            </button>
+            <button
+              class="stamp stamp-project"
+              data-full="images/screenshots/codesquad-2.png"
+              data-caption="CodeSquad Mini Course, Assignment 2"
+            >
+              <img
+                src="images/stamps/codesquad-2.png"
+                alt="Stamp for CodeSquad Mini Course assignment 2"
+              />
+              <span class="stamp-label">Assignment 2</span>
+            </button>
+            <button
+              class="stamp stamp-project"
+              data-full="images/screenshots/codesquad-3.png"
+              data-caption="CodeSquad Mini Course, Assignment 3"
+            >
+              <img
+                src="images/stamps/codesquad-3.png"
+                alt="Stamp for CodeSquad Mini Course assignment 3"
+              />
+              <span class="stamp-label">Assignment 3</span>
+            </button>
+            <div class="stamp-slot" aria-hidden="true"></div>
+            <div class="stamp-slot" aria-hidden="true"></div>
+            <div class="stamp-slot" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SPREAD 2: VISA + TRAVEL HISTORY -->
+      <section class="view spread">
+        <div class="page page-left visa-page">
+          <h2>Visa</h2>
+          <dl class="visa-details">
+            <dt>Destination</dt>
+            <dd>Your Destination</dd>
+            <dt>Visa Type</dt>
+            <dd>Dream Trip</dd>
+            <dt>Valid From</dt>
+            <dd>2026</dd>
+          </dl>
+          <!-- TODO: add destination illustration and write the description -->
+          <img
+            src="images/visa-illustration.png"
+            alt="Illustration of my dream destination"
+            class="visa-illustration"
+          />
+          <p class="visa-description">Why I want to go, in my own words.</p>
+        </div>
+
+        <div class="page page-right routes-page">
+          <h3>Entries</h3>
+          <div class="stamp-grid">
+            <figure class="stamp stamp-entry">
+              <img src="images/stamps/entry-solvelee.png" alt="Entry stamp for Solvelee, Inc." />
+              <figcaption>Solvelee</figcaption>
+            </figure>
+            <figure class="stamp stamp-entry">
+              <img
+                src="images/stamps/entry-stanford.png"
+                alt="Entry stamp for Stanford Code in Place"
+              />
+              <figcaption>Stanford</figcaption>
+            </figure>
+            <figure class="stamp stamp-entry">
+              <img src="images/stamps/entry-codepath.png" alt="Entry stamp for CodePath" />
+              <figcaption>CodePath</figcaption>
+            </figure>
+          </div>
+
+          <h3>Routes I'm Exploring</h3>
+          <div class="stamp-grid">
+            <div class="route">
+              <button class="stamp stamp-profession" aria-expanded="false">
+                <img
+                  src="images/stamps/route-fullstack.png"
+                  alt="Stamp of a layered stack of pages for full-stack web development"
+                />
+                <span class="stamp-label">Full-Stack Web Developer</span>
+              </button>
+              <p class="stamp-description is-hidden">TODO: why this path interests me.</p>
+            </div>
+            <div class="route">
+              <button class="stamp stamp-profession" aria-expanded="false">
+                <img
+                  src="images/stamps/route-mobile.png"
+                  alt="Stamp of a vintage phone for mobile app development"
+                />
+                <span class="stamp-label">Mobile App Developer</span>
+              </button>
+              <p class="stamp-description is-hidden">TODO: why this path interests me.</p>
+            </div>
+            <div class="route">
+              <button class="stamp stamp-profession" aria-expanded="false">
+                <img
+                  src="images/stamps/route-ai.png"
+                  alt="Stamp of a lightbulb for AI application development"
+                />
+                <span class="stamp-label">AI Application Developer</span>
+              </button>
+              <p class="stamp-description is-hidden">TODO: why this path interests me.</p>
+            </div>
+            <div class="stamp-slot next-stop">Next Stop: ?</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BACK COVER -->
+      <section class="view cover cover-back">
+        <h2>Contact at the Gate</h2>
+        <a
+          class="contact-stamp"
+          href="https://linkedin.com/in/lynjai-jimenez"
+          target="_blank"
+          rel="noopener noreferrer"
+          >LinkedIn</a
+        >
+        <a
+          class="contact-stamp"
+          href="https://github.com/IntermediaDesigns"
+          target="_blank"
+          rel="noopener noreferrer"
+          >GitHub</a
+        >
+        <a
+          class="contact-stamp"
+          href="https://lynjaijimenez.dev"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Personal Site</a
+        >
+      </section>
+
+      <nav class="passport-nav is-hidden">
+        <button class="prev">Previous</button>
+        <button class="next">Next</button>
+      </nav>
+    </main>
+
+    <div class="lightbox is-hidden">
+      <button class="lightbox-close" aria-label="Close">&times;</button>
+      <img class="lightbox-img" src="" alt="" />
+      <p class="lightbox-caption"></p>
+    </div>
+  </body>
+</html>

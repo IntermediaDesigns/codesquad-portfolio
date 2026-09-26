@@ -1,0 +1,606 @@
+/* ==========================================================
+   1. Variables
+   ========================================================== */
+:root {
+  --cloth: #a99a34;
+  --page: #ddafa5;
+  --page-edge: #b8887e;
+  --ink: #2e2a28;
+  --tape: #e8703a;
+  --navy: #243b63;
+  --teal: #5b9aa0;
+  --purple: #8a5a9e;
+  --stamp-paper: #f4ebd9;
+  --brass: #c9a24b;
+
+  --font-typewriter: "Special Elite", "Courier Prime", monospace;
+  --font-body: "Courier Prime", "Special Elite", monospace;
+
+  --book-width: 1000px;
+  --book-height: 640px;
+}
+
+/* ==========================================================
+   2. Base styles
+   ========================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--cloth);
+  /* subtle cloth grain; swap for images/textures/cloth.jpg later */
+  background-image: repeating-linear-gradient(
+      45deg,
+      rgba(0, 0, 0, 0.05) 0 1px,
+      transparent 1px 3px
+    ),
+    repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 3px);
+  font-family: var(--font-body);
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+main {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px 96px;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-typewriter);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin: 0 0 12px;
+}
+
+h2 {
+  font-size: 1.4rem;
+}
+
+h3 {
+  font-size: 1rem;
+  margin-top: 16px;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+dl,
+figure {
+  margin: 0;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ==========================================================
+   3. Passport shell (views, pages, spine)
+   ========================================================== */
+.view {
+  display: none;
+  width: min(var(--book-width), 100%);
+  min-height: var(--book-height);
+}
+
+.spread {
+  position: relative;
+  grid-template-columns: 1fr 1fr;
+  background-color: var(--page);
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), 0 0 0 4px var(--page-edge);
+  overflow: hidden;
+}
+
+/* spine shadow down the middle */
+.spread::after {
+  content: "";
+  position: absolute;
+  inset: 0 calc(50% - 30px);
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(0, 0, 0, 0.22) 50%,
+    transparent
+  );
+  pointer-events: none;
+}
+
+.page {
+  position: relative;
+  padding: 32px;
+  /* paper grain; swap for images/textures/paper.jpg later */
+  background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  background-size: 6px 6px;
+}
+
+.page-left {
+  border-right: 1px solid var(--page-edge);
+}
+
+/* ==========================================================
+   4. Covers
+   ========================================================== */
+.cover {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  text-align: center;
+  background-color: var(--navy);
+  color: var(--stamp-paper);
+  border-radius: 8px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45), inset 0 0 0 10px rgba(255, 255, 255, 0.06);
+}
+
+.cover h1 {
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  letter-spacing: 0.3em;
+  color: var(--brass);
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.cover h2 {
+  color: var(--brass);
+  font-size: 2rem;
+}
+
+.cover-name {
+  margin: 0;
+  font-family: var(--font-typewriter);
+  font-size: 1.4rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.open-btn,
+.prev,
+.next {
+  background-color: var(--tape);
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 4px;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.open-btn:hover,
+.prev:hover,
+.next:hover {
+  background-color: var(--stamp-paper);
+  color: var(--ink);
+}
+
+.open-btn:focus-visible,
+.prev:focus-visible,
+.next:focus-visible,
+.stamp:focus-visible,
+.contact-stamp:focus-visible,
+.lightbox-close:focus-visible {
+  outline: 3px solid var(--stamp-paper);
+  outline-offset: 3px;
+}
+
+.cover-back {
+  background-color: var(--navy);
+}
+
+.contact-stamp {
+  display: block;
+  min-width: 220px;
+  padding: 14px 24px;
+  background-color: var(--stamp-paper);
+  color: var(--ink);
+  font-family: var(--font-typewriter);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  border: 3px dashed var(--navy);
+  outline: 4px solid var(--stamp-paper);
+  transform: rotate(-2deg);
+}
+
+.contact-stamp:nth-of-type(even) {
+  transform: rotate(2deg);
+}
+
+.contact-stamp:hover {
+  background-color: var(--tape);
+  color: #fff;
+}
+
+/* ==========================================================
+   5. ID page
+   ========================================================== */
+.photo-wrapper {
+  position: relative;
+  width: 160px;
+  float: left;
+  margin: 0 20px 12px 0;
+  padding: 8px;
+  background-color: var(--stamp-paper);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  filter: grayscale(1) sepia(0.25) contrast(1.05);
+}
+
+.grommet {
+  position: absolute;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin-left: -7px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #f1d88e, var(--brass) 60%, #7d5f1f);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.grommet-top {
+  top: 4px;
+}
+
+.grommet-bottom {
+  bottom: 4px;
+}
+
+.tape-label {
+  display: inline-block;
+  margin: 6px 0 20px;
+  padding: 6px 14px;
+  background-color: var(--tape);
+  color: #fff;
+  font-family: var(--font-typewriter);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transform: rotate(-3deg);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.id-fields {
+  clear: both;
+  counter-reset: field;
+}
+
+.id-fields dt {
+  counter-increment: field;
+  margin-top: 10px;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.id-fields dt::before {
+  content: counter(field) ". ";
+}
+
+.id-fields dd {
+  margin: 0;
+  padding-bottom: 2px;
+  border-bottom: 2px dotted var(--page-edge);
+  font-family: var(--font-typewriter);
+  text-transform: uppercase;
+}
+
+.signature {
+  width: 180px;
+  margin-top: 16px;
+  mix-blend-mode: multiply;
+}
+
+.circular-stamp {
+  position: absolute;
+  right: 28px;
+  bottom: 28px;
+  width: 96px;
+  height: 96px;
+  display: grid;
+  place-items: center;
+  border: 4px double var(--purple);
+  border-radius: 50%;
+  color: var(--purple);
+  font-family: var(--font-typewriter);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.6;
+  transform: rotate(-12deg);
+  mix-blend-mode: multiply;
+}
+
+/* ==========================================================
+   6. Stamps and stamp grid
+   ========================================================== */
+.stamp-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.stamp {
+  margin: 0;
+  padding: 8px;
+  background-color: var(--stamp-paper);
+  color: var(--ink);
+  border: none;
+  text-align: center;
+  font-size: 0.75rem;
+  /* perforated edge: cream border with punched-out circles */
+  -webkit-mask: radial-gradient(circle 4px at 4px 4px, transparent 98%, #000) -4px -4px / 12px 12px;
+  mask: radial-gradient(circle 4px at 4px 4px, transparent 98%, #000) -4px -4px / 12px 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  transform: rotate(-1.5deg);
+}
+
+.stamp:nth-child(even) {
+  transform: rotate(1.5deg);
+}
+
+.stamp img {
+  width: 100%;
+  aspect-ratio: 5 / 6;
+  object-fit: cover;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.stamp-label,
+.stamp figcaption {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-typewriter);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.stamp-project,
+.stamp-profession {
+  cursor: pointer;
+}
+
+.stamp-project:hover,
+.stamp-profession:hover {
+  transform: rotate(0) scale(1.05);
+}
+
+.stamp-project {
+  border-bottom: 4px solid var(--navy);
+}
+
+.stamp-entry {
+  border-bottom: 4px solid var(--tape);
+}
+
+.stamp-profession[aria-expanded="true"] {
+  background-color: #fff;
+}
+
+.stamp-slot {
+  min-height: 120px;
+  display: grid;
+  place-items: center;
+  border: 2px dashed var(--page-edge);
+  color: var(--page-edge);
+  font-family: var(--font-typewriter);
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+/* ==========================================================
+   7. Visa page
+   ========================================================== */
+.visa-page {
+  background-color: rgba(91, 154, 160, 0.25);
+}
+
+.visa-details {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 4px 12px;
+  margin-bottom: 16px;
+}
+
+.visa-details dt {
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  align-self: end;
+}
+
+.visa-details dd {
+  margin: 0;
+  border-bottom: 2px dotted var(--page-edge);
+  font-family: var(--font-typewriter);
+  text-transform: uppercase;
+}
+
+.visa-illustration {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border: 4px solid var(--stamp-paper);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.visa-description {
+  margin-top: 16px;
+}
+
+/* ==========================================================
+   8. Travel history and routes
+   ========================================================== */
+.routes-page .stamp-grid {
+  margin-bottom: 8px;
+}
+
+.route {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.route .stamp {
+  width: 100%;
+}
+
+.stamp-description {
+  margin: 0;
+  padding: 6px;
+  background-color: var(--stamp-paper);
+  font-size: 0.7rem;
+}
+
+.next-stop {
+  align-self: start;
+  min-height: 100%;
+}
+
+/* ==========================================================
+   9. Navigation and lightbox
+   ========================================================== */
+.passport-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 16px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+}
+
+.prev:disabled,
+.next:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
+  background-color: rgba(0, 0, 0, 0.85);
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 80vh;
+  border: 6px solid var(--stamp-paper);
+}
+
+.lightbox-caption {
+  margin: 0;
+  color: var(--stamp-paper);
+  text-align: center;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--tape);
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* ==========================================================
+   10. State classes
+   ========================================================== */
+.spread.is-active {
+  display: grid;
+}
+
+.cover.is-active {
+  display: flex;
+}
+
+.is-hidden {
+  display: none;
+}
+
+/* keep the lightbox and nav hidden even though they set display above */
+.lightbox.is-hidden,
+.passport-nav.is-hidden {
+  display: none;
+}
+
+/* ==========================================================
+   11. Media queries
+   ========================================================== */
+@media (max-width: 800px) {
+  .view {
+    min-height: 0;
+  }
+
+  .cover {
+    min-height: 70vh;
+  }
+
+  .spread.is-active {
+    grid-template-columns: 1fr;
+  }
+
+  .spread::after {
+    display: none;
+  }
+
+  .page-left {
+    border-right: none;
+    border-bottom: 1px solid var(--page-edge);
+  }
+
+  .page {
+    padding: 20px;
+  }
+
+  .circular-stamp {
+    position: static;
+    margin: 16px 0 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .stamp-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .photo-wrapper {
+    float: none;
+    margin: 0 auto 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
