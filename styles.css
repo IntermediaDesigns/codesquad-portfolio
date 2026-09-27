@@ -129,6 +129,11 @@ button {
   border-right: 1px solid var(--page-edge);
 }
 
+/* leave room for the nav in the bottom-right corner */
+.page-right {
+  padding-bottom: 80px;
+}
+
 /* ==========================================================
    4. Covers
    ========================================================== */
@@ -337,17 +342,14 @@ button {
 
 .stamp {
   margin: 0;
-  padding: 8px;
-  background-color: var(--stamp-paper);
+  padding: 0;
+  background: none;
   color: var(--ink);
   border: none;
   text-align: center;
   font-size: 0.75rem;
-  /* perforated edge: cream border with punched-out circles */
-  -webkit-mask: radial-gradient(circle 4px at 4px 4px, transparent 98%, #000) -4px -4px / 12px 12px;
-  mask: radial-gradient(circle 4px at 4px 4px, transparent 98%, #000) -4px -4px / 12px 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
   transform: rotate(-1.5deg);
+  transition: transform 0.15s ease;
 }
 
 .stamp:nth-child(even) {
@@ -356,9 +358,9 @@ button {
 
 .stamp img {
   width: 100%;
-  aspect-ratio: 5 / 6;
-  object-fit: cover;
-  background-color: rgba(0, 0, 0, 0.06);
+  height: auto;
+  /* the PNG is the stamp: its own edges, no frame or crop */
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.35));
 }
 
 .stamp-label,
@@ -380,16 +382,8 @@ button {
   transform: rotate(0) scale(1.05);
 }
 
-.stamp-project {
-  border-bottom: 4px solid var(--navy);
-}
-
-.stamp-entry {
-  border-bottom: 4px solid var(--tape);
-}
-
-.stamp-profession[aria-expanded="true"] {
-  background-color: #fff;
+.stamp-profession[aria-expanded="true"] img {
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.9));
 }
 
 .stamp-slot {
@@ -476,14 +470,18 @@ button {
 /* ==========================================================
    9. Navigation and lightbox
    ========================================================== */
+.passport {
+  position: relative;
+  width: min(var(--book-width), 100%);
+}
+
 .passport-nav {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 16px;
+  position: absolute;
+  right: 24px;
+  bottom: 20px;
+  z-index: 2;
   display: flex;
-  justify-content: center;
-  gap: 16px;
+  gap: 12px;
 }
 
 .prev:disabled,
